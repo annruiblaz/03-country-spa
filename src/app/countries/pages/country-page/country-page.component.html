@@ -1,1 +1,73 @@
-<p>country-page works!</p>
+<ng-template #loading>
+    <div class="alert alert-info text-center">
+        Espere por favor
+    </div>
+</ng-template>
+
+<div *ngIf="country; else loading">
+    <div class="row">
+        <h2>{{country.name.common}}</h2>
+        <hr>
+    </div>
+
+    <div class="row">
+        <div class="col-6">
+            <h3>Bandera</h3>
+            <img [src]="country.flags.svg" [alt]="country.name.common" class="img-thumbnail">
+        </div>
+        <div class="col-6">
+            <h3>Información</h3>
+            <ul class="list-group">
+                <li class="list-group-item">
+                    <strong>Capital:</strong> {{country.capital}}
+                </li>
+
+                <li class="list-group-item">
+                    <strong>Población:</strong> {{country.population | number}}
+                </li>
+
+                <li class="list-group-item">
+                    <strong>Moneda:</strong>
+                    {{country.currencies.CRC?.name}}
+                    <span class="badge bg-info">{{country.currencies.CRC?.symbol}}</span>
+                </li>
+
+                <li class="list-group-item">
+                    <strong>Código:</strong> {{country.cca3}}
+                </li>
+
+                <li class="list-group-item">
+                    <strong>Región:</strong> {{country.region}}
+                </li>
+
+                <li class="list-group-item">
+                    <strong>{{country.continents.length > 1 ? 'Continentes' : 'Continente'}}:</strong>
+                    <span *ngFor="let continent of country.continents"> {{continent}}</span>
+                </li>
+
+                <li class="list-group-item">
+                    <strong>Comienza la semana el:</strong> {{country.startOfWeek}}
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="row mt-2">
+        <div class="col">
+            <h3>Traducciones</h3>
+
+            <div class="d-flex flex-wrap">
+                <span class="badge bg-primary m-1">{{country.translations['es']?.official}}</span>
+                <span class="badge bg-primary m-1">{{country.translations['rus']?.official}}</span>
+                <span class="badge bg-primary m-1">{{country.translations['por']?.official}}</span>
+                <span class="badge bg-primary m-1">{{country.translations['fin']?.official}}</span>
+                <span class="badge bg-primary m-1">{{country.translations['fr']?.official}}</span>
+                <span class="badge bg-primary m-1">{{country.translations['ja']?.official}}</span>
+                <span class="badge bg-primary m-1">{{country.translations['br']?.official}}</span>
+                <span class="badge bg-primary m-1">{{country.translations['ara']?.official}}</span>
+            </div>
+
+
+        </div>
+    </div>
+</div>
