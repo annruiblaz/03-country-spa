@@ -1,8 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { CountriesService } from '../../services/countries.service';
+
 import { switchMap } from 'rxjs';
+import * as L from 'leaflet';
+
 import { Country } from '../../interfaces/country';
+import { CountriesService } from '../../services/countries.service';
 
 @Component({
   selector: 'countries-country-page',
@@ -11,22 +14,49 @@ import { Country } from '../../interfaces/country';
     h2 {
       font-weight: 600;
     }
-      img {
+
+    img {
         width: 100%;
         height: auto;
         min-width: 150px;
         object-fit: cover;
-        trnasl: 
+    }
+
+    #map {
+      margin: 0;
+      padding: 0;
+      width: 100%;
+      height: 100%;
+      min-height: 400px;
+      border: 1px solid black;
+      border-radius: 20px;
+    }
+
+    .map-container {
+      margin: 0 5px;
+      justify-content: center;
+      gap: 10px;
+
+      @media(min-width: 960px) {
+        margin: 0;
       }
+    }
+
+    .btn-sm {
+      max-width: 180px;
+  }
   `
 })
-export class CountryPageComponent implements OnInit{
+export class CountryPageComponent implements OnInit, OnDestroy {
   public country?: Country;
+  public map?: any;
+  public currenciesKeys!: Object[];
 
   constructor( private activatedRoute: ActivatedRoute,
       private countriesService: CountriesService,
       private router: Router
   ) {}
+
   ngOnInit(): void {
     this.activatedRoute.params
     .pipe(
@@ -35,8 +65,19 @@ export class CountryPageComponent implements OnInit{
     .subscribe(
       (country) => {
         this.searchByAlphaCode(country);
+        
+        if(this.country) {
+          setTimeout(() => {
+            this.initializeMap();
+          }, 500); 
+      }
       }
     );
+
+  }
+
+  ngOnDestroy(): void {
+    this.map.remove();
   }
 
   searchByAlphaCode(country: Country | null) {
@@ -44,4 +85,30 @@ export class CountryPageComponent implements OnInit{
     return this.country = country;
   }
 
+  initializeMap() {
+
+    const mapContainer = document.getElementById('map');
+    if (!mapContainer) {
+      console.error('El contenedor del mapa no existe en el DOM.');
+      return;
+    }
+
+    if (!this.country || !this.country.latlng) return;
+
+    const center:[number, number] = [this.country.latlng[0], this.country.latlng[1]];
+
+    this.map = L.map ('map', {
+      center: center,
+      zoom: 6
+    });
+
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      maxZoom: 19,
+      attribution: '© OpenStreetMap contributors',
+    }).addTo(this.map);
+
+    this.map.invalidateSize();
+  }
+
 }
+
