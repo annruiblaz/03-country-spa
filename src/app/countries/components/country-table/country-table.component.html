@@ -21,7 +21,13 @@
                 <td><img [src]="country.flags.svg" [alt]="country.name.common"></td>
                 <td>{{country.capital}}</td>
                 <td>{{country.name.common}}</td>
-                <td><a [routerLink]="['/countries/by/', country.cca3]">+ info</a></td>
+                <td><a 
+                        [routerLink]="['/countries/by/', country.cca3]"
+                        class="badge bg-primary"
+                        style="text-decoration: none;"
+                    >
+                        + Info
+                </a></td>
             </tr>
         </tbody>
     </table>

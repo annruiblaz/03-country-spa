@@ -19,6 +19,7 @@
         <hr>
         <shared-loading-spinner *ngIf="isLoading" [term]="'Región'"></shared-loading-spinner>
 
-       <countries-table [countries]="countries"></countries-table>
-    </div>
+        <country-card [countries]="countries" class="d-block d-md-none"></country-card>
+        <countries-table [countries]="countries" class="d-none d-md-block"></countries-table>
+        </div>
 </div>
