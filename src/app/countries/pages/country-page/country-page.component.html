@@ -39,12 +39,6 @@
                 <li class="list-group-item">
                     <strong>👥 Población:</strong> {{country.population | number}}
                 </li>
-<!-- 
-                <li class="list-group-item" *ngFor="let currency of country.currencies">
-                    <strong>🪙 Moneda:</strong>
-                    {{country.currencies.CRC?.name}}
-                    <span class="badge bg-info">{{country.currencies.CRC?.symbol || country.currencies.EUR?.symbol}}</span>
-                </li> -->
 
                 <li class="list-group-item">
                     <strong>📇 Código:</strong> {{country.cca3}}
@@ -55,25 +49,19 @@
                 </li>
 
                 <li class="list-group-item">
-                    <strong>{{country.continents.length > 1 ? 'Continentes' : 'Continente'}}:</strong>
+                    <strong>🌐 {{country.continents.length > 1 ? 'Continentes' : 'Continente'}}:</strong>
                     <span *ngFor="let continent of country.continents"> {{continent}}</span>
                 </li>
 
                 <li class="list-group-item">
-                    <strong>📆 Comienza la semana el:</strong> {{country.startOfWeek}}
+                    <strong>📆 Comienza la semana el:</strong> {{getStartOfWeek(country.startOfWeek)}}
                 </li>
-<!-- 
-                <li class="list-group-item" *ngIf="country.languages">
-                    <strong>🗣️ Idiomas:</strong>
-                </li> -->
             </ul>
         </div>
     </div>
     
-    <div class="row mt-3 map-container pb-5">
+    <div class="row mt-3 map-container pb-5 justify-content-center">
         <div id="map"></div>
-        <a class="btn btn-outline-primary btn-sm m-2" [href]="country.maps.openStreetMaps" target="_blank">
-            <small>Ver mapa en OpenStreetMap</small>
-        </a>
+        <button class="btn btn-outline-primary btn-sm m-2" style="max-width: 220px;" (click)="country.maps.openStreetMaps" target="_blank"> Ver mapa en OpenStreetMap</button>
     </div>
 </div>

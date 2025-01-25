@@ -25,14 +25,14 @@ import { CountriesService } from '../../services/countries.service';
     #map {
       margin: 0 auto;
       padding: 0;
-      width: 100%;
+      width: 95%;
       height: 400px;
-      max-width: 600px;
       border: 1px solid black;
       border-radius: 20px;
       box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
-
+      
       @media(min-width: 960px) {
+        max-width: 600px;
         height: 300px;
       }
 
@@ -50,7 +50,6 @@ import { CountriesService } from '../../services/countries.service';
 export class CountryPageComponent implements OnInit, OnDestroy {
   public country?: Country;
   public map?: any;
-  public currenciesKeys!: Object[];
 
   constructor( private activatedRoute: ActivatedRoute,
       private countriesService: CountriesService,
@@ -108,6 +107,17 @@ export class CountryPageComponent implements OnInit, OnDestroy {
     }).addTo(this.map);
 
     this.map.invalidateSize();
+  }
+
+  getStartOfWeek(day: string): string {
+    switch(day) {
+      case 'monday':
+        return 'Lunes';
+      case 'sunday':
+        return 'Domingo';
+      default: 
+        return 'No tenemos la información.'
+    }
   }
 
 }
