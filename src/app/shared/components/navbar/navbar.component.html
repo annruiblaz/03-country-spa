@@ -1,0 +1,14 @@
+
+
+<nav class="nav nav-pills nav-fill">
+    <a
+      *ngFor="let item of menuOptions"
+      class="nav-link"
+      [routerLink]="item.routerLink"
+      routerLinkActive="active"
+      [routerLinkActiveOptions]="{exact: true}"
+      aria-orientation="vertical"
+    >
+      {{item.title}}
+    </a>
+</nav>
