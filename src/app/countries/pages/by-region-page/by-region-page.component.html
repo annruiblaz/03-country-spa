@@ -1,22 +1,20 @@
-<h2>Por Región</h2>
-
-<hr>
-
 <div class="row">
-    <div class="col">
-        <button *ngFor="let region of regionsName; let i = index"
-            [ngClass]="{'btn-outline-primary': selectedRegion === regions[i]}"
-            class="btn mx-2"
+    <div class="col text-center">
+        <div class="btn-group btn-group-sm mb-3" role="group">
+            <button *ngFor="let region of regionsName; let i = index"
+            [ngClass]="{'btn-secondary text-white': selectedRegion === regions[i]}"
+            class="btn btn-outline-secondary"
             (click)="searchByRegion(regions[i])"
-        >
-            {{region}}
-        </button>
+            type="button"
+            >
+                {{region}}
+            </button>
+        </div>
     </div>
 </div>
 
 <div class="row">
     <div class="col">
-        <hr>
         <shared-loading-spinner *ngIf="isLoading" [term]="'Región'"></shared-loading-spinner>
 
         <country-card [countries]="countries" class="d-block d-md-none"></country-card>

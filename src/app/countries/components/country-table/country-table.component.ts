@@ -10,6 +10,10 @@ import { Country } from '../../interfaces/country';
       height: 25px;
       object-fit: cover;
     }
+
+    th, td {
+      border-style: dashed;
+    }
   `
 })
 export class CountryTableComponent {

@@ -2,12 +2,14 @@
 
 <nav class="nav nav-pills nav-fill">
     <a
-      *ngFor="let item of menuOptions"
+      *ngFor="let item of menuOptions; let i = index"
       class="nav-link"
       [routerLink]="item.routerLink"
       routerLinkActive="active"
       [routerLinkActiveOptions]="{exact: true}"
       aria-orientation="vertical"
+      [ngClass]="{'btn-secondary text-white': selectedMenu === menuOptions[i]}"
+      (click)="saveSelectedMenu(item)"
     >
       {{item.title}}
     </a>

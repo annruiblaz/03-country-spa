@@ -1,8 +1,11 @@
-<input
+<div class="input-group mb-3">
+    <span class="input-group-text" id="basic-addon1"><i class="bi bi-search text-info"></i></span>
+    <input
     type="text"
     [placeholder]="placeholder"
     [value]="initialValue"
     class="form-control"
     #txtSearchInput
     (keyup)="onKeyPress(txtSearchInput.value)"
->
+    >
+</div>

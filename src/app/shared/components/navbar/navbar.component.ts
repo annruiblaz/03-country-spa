@@ -16,7 +16,10 @@ export class NavbarComponent {
     { title: 'Por Capital', routerLink: 'countries/by-capital'}
   ];
 
-  public isOpenMenu: boolean = false;
+  public selectedMenu?: SideMenuItem;
 
+  saveSelectedMenu(selected: SideMenuItem):void {
+    this.selectedMenu = selected;
+  }
 
 }
