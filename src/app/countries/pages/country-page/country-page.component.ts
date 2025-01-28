@@ -22,12 +22,19 @@ import { CountriesService } from '../../services/countries.service';
         object-fit: cover;
     }
 
+    li,
+    hr {
+      border-style: dashed;
+      border-color: var(--bs-border-color-translucent);
+      border-width: var(--bs-border-width);
+    }
+
     #map {
       margin: 0 auto;
       padding: 0;
       width: 95%;
       height: 400px;
-      border: 1px solid black;
+      border: 1px dashed var(--bs-border-color-translucent);
       border-radius: 20px;
       box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
       
@@ -35,16 +42,6 @@ import { CountriesService } from '../../services/countries.service';
         max-width: 600px;
         height: 300px;
       }
-
-    .map-container {
-      margin: 0 5px;
-      justify-content: center;
-      gap: 10px;
-
-      @media(min-width: 960px) {
-        margin: 0;
-      }
-    }
   `
 })
 export class CountryPageComponent implements OnInit, OnDestroy {
